@@ -11,13 +11,10 @@ class TableViewCell: UITableViewCell {
     
     @IBOutlet weak var cellText: UILabel!
     @IBOutlet weak var checkIamge: UIImageView!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+   
+    func configure(item: Item){
+        cellText.text = item.name
+        checkIamge.isHidden = !item.isChecked
     }
     
 }
