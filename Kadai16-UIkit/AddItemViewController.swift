@@ -2,34 +2,32 @@
 //  AddItemViewController.swift
 //  Kadai16-UIkit
 //
-//  Created by sako0602 on 2023/07/05.
+//  Created by sako0602 on 2023/07/07.
 //
 
 import UIKit
 
 class AddItemViewController: UIViewController {
     
-    enum Result {
-        case save(String), cancell
+    enum Mode {
+        case Add, Edit
     }
 
-    @IBOutlet weak var itemTextField: UITextField!
+    var mode = Mode.Add
     
-    var selectedItem: Item?
+    @IBOutlet weak var itemAddTextField: UITextField!
     
-    private var result: Result?
-    
-    var onViewDidDisapper: (Result) -> Void = { _ in }
+    var name = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        itemTextField.text = selectedItem?.name
+        if mode == .Edit {
+            itemAddTextField.text = name
+        }
     }
-    
-    @IBAction func saveItem(_ semder: Any){
-        result = .save(itemTextField.text ?? "")
-        guard let result = result else { return }
-        onViewDidDisapper(result)
+
+    @IBAction func pressSaveButton(sender: AnyObject){
+        let identifier = (mode == .Add) ? "exitFromAddBySaveSegue" : ""
     }
     
 }

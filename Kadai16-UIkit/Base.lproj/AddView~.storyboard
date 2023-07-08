@@ -28,18 +28,34 @@
                     <navigationItem key="navigationItem" id="XsB-YK-pDC">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="51V-WA-ym5">
                             <connections>
-                                <segue destination="mYv-Ft-iPO" kind="presentation" identifier="addSegue" id="pHj-Zv-0tn"/>
+                                <segue destination="UDg-qk-ggx" kind="presentation" id="pHj-Zv-0tn"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="ItemTableView" destination="kGo-pm-6yX" id="1cz-S4-Q5Y"/>
-                        <segue destination="mYv-Ft-iPO" kind="presentation" identifier="editSegue" id="UH8-dG-6gC"/>
+                        <segue destination="UDg-qk-ggx" kind="presentation" id="UH8-dG-6gC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="997.70992366412213" y="3.5211267605633805"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="lt9-XM-Kh3">
+            <objects>
+                <viewController id="iVt-hQ-qBg" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xSs-2y-dGU">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="W76-Ic-o8F"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="sVP-m7-atf"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uGo-As-xjK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3745.801526717557" y="-231.69014084507043"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="pkb-m5-HVH">
@@ -59,13 +75,23 @@
             </objects>
             <point key="canvasLocation" x="70.992366412213741" y="3.5211267605633805"/>
         </scene>
-        <!--AddView-->
-        <scene sceneID="ZFS-5V-1NF">
+        <!--Navigation Controller-->
+        <scene sceneID="ECk-za-UJi">
             <objects>
-                <viewControllerPlaceholder storyboardName="AddView" id="mYv-Ft-iPO" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mMX-c7-pvg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="UDg-qk-ggx" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Uxi-ZZ-cbn">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="iVt-hQ-qBg" kind="relationship" relationship="rootViewController" id="67X-vH-dNI"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bPR-cc-Jn2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1672" y="4"/>
+            <point key="canvasLocation" x="2819.0839694656488" y="-231.69014084507043"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

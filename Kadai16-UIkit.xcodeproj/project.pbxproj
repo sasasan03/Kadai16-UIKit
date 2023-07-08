@@ -19,8 +19,8 @@
 		69BD0BAA2A559C2200DD7041 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BD0BA82A559C2200DD7041 /* TableViewCell.swift */; };
 		69BD0BAB2A559C2200DD7041 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69BD0BA92A559C2200DD7041 /* TableViewCell.xib */; };
 		69BD0BAD2A559DCD00DD7041 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BD0BAC2A559DCD00DD7041 /* Model.swift */; };
-		69BD0BB02A55A22000DD7041 /* AddItemView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69BD0BAE2A55A22000DD7041 /* AddItemView.storyboard */; };
-		69BD0BB22A55A27200DD7041 /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BD0BB12A55A27200DD7041 /* AddItemViewController.swift */; };
+		69BD0BB42A58436700DD7041 /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BD0BB32A58436700DD7041 /* AddItemViewController.swift */; };
+		69BD0BB72A58438100DD7041 /* AddView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69BD0BB52A58438100DD7041 /* AddView.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,8 +57,8 @@
 		69BD0BA82A559C2200DD7041 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		69BD0BA92A559C2200DD7041 /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
 		69BD0BAC2A559DCD00DD7041 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
-		69BD0BAF2A55A22000DD7041 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Kadai16-UIkit/Base.lproj/AddItemView.storyboard"; sourceTree = "<group>"; };
-		69BD0BB12A55A27200DD7041 /* AddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
+		69BD0BB32A58436700DD7041 /* AddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
+		69BD0BB62A58438100DD7041 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Kadai16-UIkit/Base.lproj/AddView.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,10 +112,10 @@
 				69BD0B782A559A1E00DD7041 /* AppDelegate.swift */,
 				69BD0B7A2A559A1E00DD7041 /* SceneDelegate.swift */,
 				69BD0BAC2A559DCD00DD7041 /* Model.swift */,
-				69BD0BB12A55A27200DD7041 /* AddItemViewController.swift */,
-				69BD0BAE2A55A22000DD7041 /* AddItemView.storyboard */,
 				69BD0B7C2A559A1E00DD7041 /* ViewController.swift */,
 				69BD0B7E2A559A1E00DD7041 /* Main.storyboard */,
+				69BD0BB32A58436700DD7041 /* AddItemViewController.swift */,
+				69BD0BB52A58438100DD7041 /* AddView.storyboard */,
 				69BD0BA82A559C2200DD7041 /* TableViewCell.swift */,
 				69BD0BA92A559C2200DD7041 /* TableViewCell.xib */,
 				69BD0B812A559A1F00DD7041 /* Assets.xcassets */,
@@ -246,8 +246,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69BD0BB72A58438100DD7041 /* AddView.storyboard in Resources */,
 				69BD0B852A559A1F00DD7041 /* LaunchScreen.storyboard in Resources */,
-				69BD0BB02A55A22000DD7041 /* AddItemView.storyboard in Resources */,
 				69BD0BAB2A559C2200DD7041 /* TableViewCell.xib in Resources */,
 				69BD0B822A559A1F00DD7041 /* Assets.xcassets in Resources */,
 				69BD0B802A559A1E00DD7041 /* Main.storyboard in Resources */,
@@ -280,7 +280,7 @@
 				69BD0BAA2A559C2200DD7041 /* TableViewCell.swift in Sources */,
 				69BD0B792A559A1E00DD7041 /* AppDelegate.swift in Sources */,
 				69BD0B7B2A559A1E00DD7041 /* SceneDelegate.swift in Sources */,
-				69BD0BB22A55A27200DD7041 /* AddItemViewController.swift in Sources */,
+				69BD0BB42A58436700DD7041 /* AddItemViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,12 +333,12 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
-		69BD0BAE2A55A22000DD7041 /* AddItemView.storyboard */ = {
+		69BD0BB52A58438100DD7041 /* AddView.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				69BD0BAF2A55A22000DD7041 /* Base */,
+				69BD0BB62A58438100DD7041 /* Base */,
 			);
-			name = AddItemView.storyboard;
+			name = AddView.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

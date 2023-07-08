@@ -11,7 +11,9 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var ItemTableView: UITableView!
     
-    let cellIdentifier = "CellIdentifier"
+    let cellIdentifier = "cellIdentifier"
+    
+    var editIndexPath: IndexPath?
     
     var itemArray = [
     Item(name: "朝もく", isChecked: false),
@@ -21,12 +23,46 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        ItemTableView.dataSource = self
+        ItemTableView.delegate = self
+        ItemTableView.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let add = (segue.destination as? UINavigationController)?.topViewController as? AddItemViewController {
+            switch segue.identifier {
+            case "addSegue":
+                add.mode = AddItemViewController.Mode.Add
+                break
+            case "editSegue":
+                add.mode = AddItemViewController.Mode.Edit
+                //🟥senderの中に入っているもののマーク
+                if let indexPath = sender as? IndexPath {
+                    let item = self.itemArray[indexPath.row]
+                    add.name = item.name
+                }
+                break
+            default :
+                break
+            }
+        }
+    }
+    
+    @IBAction func exitFromAddSave(segue: UIStoryboardSegue) {
         
     }
 
+    @IBAction func exitFromAddCancel(segue: UIStoryboardSegue) {
+        
+    }
+    
+    @IBAction func exitFromEditSave(segue: UIStoryboardSegue) {
+        
+    }
+    
+    @IBAction func exitFromEditCancel(segue: UIStoryboardSegue) {
+        
+    }
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource{
@@ -43,6 +79,11 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         itemArray[indexPath.row].isChecked.toggle()
         tableView.reloadData()
+    }
+    //🟥
+    func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        editIndexPath = indexPath
+        performSegue(withIdentifier: "editSegue", sender: indexPath)
     }
     
     
