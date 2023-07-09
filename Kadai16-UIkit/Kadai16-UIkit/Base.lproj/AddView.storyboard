@@ -34,11 +34,16 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="sVP-m7-atf">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="lkX-6B-8EF"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="lkX-6B-8EF">
+                            <connections>
+                                <action selector="pressSaveButton:" destination="iVt-hQ-qBg" id="Wky-Nh-SEK"/>
+                                <segue destination="UiW-Uf-nFE" kind="unwind" unwindAction="exitFromAddCancelWithSegue:" id="t1X-Un-b5A"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="Zr0-Ut-IJw">
                             <connections>
                                 <action selector="pressSaveButtonWithSender:" destination="iVt-hQ-qBg" id="xKS-zD-u7u"/>
-                                <segue destination="UiW-Uf-nFE" kind="unwind" unwindAction="exitFromAddSaveWithSegue:" id="vGk-vq-Woj"/>
+                                <segue destination="UiW-Uf-nFE" kind="unwind" unwindAction="exitFromAddSaveWithSegue:" id="56s-Xf-Zak"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

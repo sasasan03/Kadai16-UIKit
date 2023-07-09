@@ -8,7 +8,7 @@
 import UIKit
 
 class AddItemViewController: UIViewController {
-    
+    //Modeの切り替えで新規追加の画面なのか、編集する画面なのか決定している
     enum Mode {
         case Add, Edit
     }
@@ -30,4 +30,5 @@ class AddItemViewController: UIViewController {
         let identifier = (mode == .Add) ? "exitFromAddBySaveSegue" : ""
     }
     
+    @IBAction func pressCancelButton(_ sender: Any) { }
 }

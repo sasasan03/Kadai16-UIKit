@@ -30,7 +30,7 @@ class ViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let add = (segue.destination as? UINavigationController)?.topViewController as? AddItemViewController {
-            switch segue.identifier {
+            switch segue.identifier ?? "" {
             case "addSegue":
                 add.mode = AddItemViewController.Mode.Add
                 break
@@ -48,38 +48,28 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func exitFromAddSave(segue: UIStoryboardSegue) {
-        
-    }
+    @IBAction func exitFromAddSave(segue: UIStoryboardSegue) { }
 
-    @IBAction func exitFromAddCancel(segue: UIStoryboardSegue) {
-        
-    }
-    
-    @IBAction func exitFromEditSave(segue: UIStoryboardSegue) {
-        
-    }
-    
-    @IBAction func exitFromEditCancel(segue: UIStoryboardSegue) {
-        
-    }
+    @IBAction func exitFromAddCancel(segue: UIStoryboardSegue) { }
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return itemArray.count
     }
-    
+    //MARK: cellを構築
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! TableViewCell
         cell.configure(item: itemArray[indexPath.row])
         return cell
     }
-    
+    //MARK: タップされたcellを識別
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         itemArray[indexPath.row].isChecked.toggle()
         tableView.reloadData()
     }
+    
+    //MARK: タップされたcellの番号を取得し、segueに情報を渡す。
     //🟥
     func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         editIndexPath = indexPath
