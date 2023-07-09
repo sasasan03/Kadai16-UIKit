@@ -11,6 +11,10 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var ItemTableView: UITableView!
     
+    @IBAction func exitFromAddSave(segue: UIStoryboardSegue) { }
+    
+    @IBAction func exitFromAddCancel(segue: UIStoryboardSegue) { }
+    
     let cellIdentifier = "cellIdentifier"
     
     var editIndexPath: IndexPath?
@@ -47,11 +51,9 @@ class ViewController: UIViewController {
             }
         }
     }
-    
-    @IBAction func exitFromAddSave(segue: UIStoryboardSegue) { }
-
-    @IBAction func exitFromAddCancel(segue: UIStoryboardSegue) { }
 }
+
+//MARK: - TabelViewDelegateとDataSourceプロトコルに適合
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -75,7 +77,5 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
         editIndexPath = indexPath
         performSegue(withIdentifier: "editSegue", sender: indexPath)
     }
-    
-    
 }
 

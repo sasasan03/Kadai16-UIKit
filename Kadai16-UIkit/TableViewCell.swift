@@ -11,8 +11,6 @@ class TableViewCell: UITableViewCell {
     
     @IBOutlet weak var cellText: UILabel!
     @IBOutlet weak var checkIamge: UIImageView!
-    @IBOutlet weak var toEditViewButton: UIButton!
-    
     
     func configure(item: Item){
         cellText.text = item.name

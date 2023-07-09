@@ -27,7 +27,7 @@ class AddItemViewController: UIViewController {
     }
 
     @IBAction func pressSaveButton(sender: AnyObject){
-        let identifier = (mode == .Add) ? "exitFromAddBySaveSegue" : ""
+       
     }
     
     @IBAction func pressCancelButton(_ sender: Any) { }
