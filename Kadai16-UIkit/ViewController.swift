@@ -17,6 +17,9 @@ class ViewController: UIViewController {
     
     let cellIdentifier = "cellIdentifier"
     
+    private var itemName = ""
+    private var itemNum = 0
+    
     var editIndexPath: IndexPath?
     
     var itemArray = [
@@ -34,13 +37,14 @@ class ViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let add = (segue.destination as? UINavigationController)?.topViewController as? AddItemViewController {
+        //    print(">>>prepare", segue.identifier ?? "")
             switch segue.identifier ?? "" {
             case "addSegue":
-                add.mode = AddItemViewController.Mode.Add
+                add.mode = AddItemViewController.Mode.add
                 break
             case "editSegue":
-                add.mode = AddItemViewController.Mode.Edit
-                //🟥senderの中に入っているもののマーク
+                add.mode = AddItemViewController.Mode.edit(.init(name: itemName, index: itemNum))
+                //🍔senderの中に入っているもののマーク
                 if let indexPath = sender as? IndexPath {
                     let item = self.itemArray[indexPath.row]
                     add.name = item.name
@@ -56,6 +60,7 @@ class ViewController: UIViewController {
 //MARK: - TabelViewDelegateとDataSourceプロトコルに適合
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource{
+    //MARK: itemArray配列の中に入っている個数を返す
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return itemArray.count
     }
@@ -72,10 +77,30 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     //MARK: タップされたcellの番号を取得し、segueに情報を渡す。
-    //🟥
+    //🍔
     func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        editIndexPath = indexPath
+        itemName = itemArray[indexPath.row].name
+        print(">>>", itemName)
+        itemNum = indexPath.row
+//        editIndexPath = indexPath
+//        print("+++", editIndexPath)
         performSegue(withIdentifier: "editSegue", sender: indexPath)
     }
+}
+//MARK: - 自作したTextFieldDelegateに適合させる
+extension ViewController: TextFieldDelegate {
+    //MARK: 新しい要素を配列に入れる
+    func didSaveAdd(neme: String) {
+        self.itemArray.append(Item(name: neme, isChecked: false))
+        ItemTableView.reloadData()
+    }
+    //MARK: 選択されたcellの配列を上書きする
+    func didSaveEdit(name: String, index: Int) {
+        guard let editIndexPath = editIndexPath else { return }
+        itemArray[index].name = name
+        ItemTableView.reloadRows(at: [editIndexPath] , with: .automatic)
+    }
+    
+    
 }
 
