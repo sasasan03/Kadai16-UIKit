@@ -43,7 +43,6 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="Zr0-Ut-IJw">
                             <connections>
                                 <action selector="pressSaveButtonWithSegue:sender:" destination="iVt-hQ-qBg" id="9Oi-Z5-Hss"/>
-                                <segue destination="UiW-Uf-nFE" kind="unwind" unwindAction="exitFromAddSaveWithSegue:" id="56s-Xf-Zak"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

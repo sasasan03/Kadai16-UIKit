@@ -5,6 +5,8 @@
 //  Created by sako0602 on 2023/07/05.
 //
 
+//🍔Storyboard ID : mainVC
+
 import UIKit
 
 class ViewController: UIViewController {
@@ -17,12 +19,13 @@ class ViewController: UIViewController {
     
     let cellIdentifier = "cellIdentifier"
     
+    var sample = ""
     private var itemName = ""
     private var itemNum = 0
     
     var editIndexPath: IndexPath?
     
-    var itemArray = [
+    var itemArray = [ //🍔ここに値を代入したい。
     Item(name: "朝もく", isChecked: false),
     Item(name: "昼もく", isChecked: true),
     Item(name: "夜もく", isChecked: false)
@@ -80,7 +83,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
     //🍔
     func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         itemName = itemArray[indexPath.row].name
-        print(">>>", itemName)
         itemNum = indexPath.row
 //        editIndexPath = indexPath
 //        print("+++", editIndexPath)
@@ -100,7 +102,5 @@ extension ViewController: TextFieldDelegate {
         itemArray[index].name = name
         ItemTableView.reloadRows(at: [editIndexPath] , with: .automatic)
     }
-    
-    
 }
 

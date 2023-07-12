@@ -24,12 +24,11 @@ class AddItemViewController: UIViewController {
     }
 
     var mode: Mode?
-    
     weak var delegate: TextFieldDelegate?
+    var name = ""
+    
     
     @IBOutlet weak var itemAddTextField: UITextField!
-    
-    var name = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,19 +41,56 @@ class AddItemViewController: UIViewController {
             break
         }
     }
-
-    @IBAction func pressSaveButton(sender: Any){
-        guard let itemAddTextfield  = itemAddTextField else { return }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch mode {
         case .add:
-            delegate?.didSaveAdd(neme: itemAddTextfield.text ?? "")
+            if segue.identifier == "addSegue" {
+                let addView = segue.destination as! AddItemViewController
+                addView.name = ""
+            }
         case .edit(let editMode):
-            delegate?.didSaveEdit(name: itemAddTextfield.text ?? "", index: editMode.index)
+            if segue.identifier == "editSegue" {
+                let editView = segue.destination as! AddItemViewController
+                editView.name = itemAddTextField.text!
+               
+            }
         default:
-            return
-            
+            break
         }
+    }
+            
+
+    @IBAction func pressSaveButton( _ sender: Any){
+        guard let name = itemAddTextField.text else { return }
+        let mainView = self.storyboard?.instantiateViewController(identifier: "mainVC") as! ViewController
+        
+        switch mode {
+        case .add:
+            mainView.sample = itemAddTextField.text!
+            //mainView.itemArray.append(Item(name: itemAddTextField.text!, isChecked: false))
+            self.navigationController?.pushViewController(mainView, animated: true)
+        case .edit(let editMode):
+            break
+        default:
+            break
+        }
+        
+        
+        
+        
+        //        guard let itemAddTextfield  = itemAddTextField.text else { return }
+        //        print("itemAddTF", itemAddTextfield)
+        //        switch mode {
+        //        case .add:
+        //            delegate?.didSaveAdd(neme: itemAddTextfield)
+        //        case .edit(let editMode):
+        //            delegate?.didSaveEdit(name: itemAddTextfield,index: editMode.index)
+        //        default:
+        //            return
+        //        }
     }
     
     @IBAction func pressCancelButton(_ sender: Any) { }
 }
+
