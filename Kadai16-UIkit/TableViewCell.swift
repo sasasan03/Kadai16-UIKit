@@ -9,6 +9,10 @@ import UIKit
 
 class TableViewCell: UITableViewCell {
     
+    static let nibName = "TableViewCell"
+    
+    static let cellIdentifier = "cellIdentifier"
+    
     @IBOutlet weak var cellText: UILabel!
     @IBOutlet weak var checkIamge: UIImageView!
     

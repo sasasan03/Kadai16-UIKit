@@ -42,7 +42,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="Zr0-Ut-IJw">
                             <connections>
-                                <action selector="pressSaveButtonWithSegue:sender:" destination="iVt-hQ-qBg" id="9Oi-Z5-Hss"/>
+                                <action selector="pressSaveButton:" destination="iVt-hQ-qBg" id="6td-jI-jtj"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

@@ -7,90 +7,49 @@
 
 import UIKit
 
+//viewControllerから渡されてきた値を表示して編集できるようにする。
+//🟦デリゲートを使って値を渡す。
+//🟥segueの役割
+
 protocol TextFieldDelegate: AnyObject {
-    func didSaveAdd(neme: String)
+    //func didSaveAdd(neme: String)
     func didSaveEdit(name: String, index: Int)
 }
 
 class AddItemViewController: UIViewController {
-    //Modeの切り替えで新規追加の画面なのか、編集する画面なのか決定している
-    enum Mode {
-        case add, edit(EditMode)
-    }
     
-    struct EditMode {
-        let name: String
-        let index: Int
-    }
-
-    var mode: Mode?
-    weak var delegate: TextFieldDelegate?
-    var name = ""
-    
+    static let editSegueIdentifier = "editSegue"
+    static let addSegueIdentifier = "addSegue"
     
     @IBOutlet weak var itemAddTextField: UITextField!
+
+    //MARK: -Viewを構築するために必要なプロパティ
+    let indexPath: IndexPath? = nil
+    var delegate: TextFieldDelegate? = nil
     
+    
+    //MARK: - コンポーネント
+    
+    //MARK: cancelボタンのセグエ
+    @IBAction func pressCancelButton(_ sender: Any) { }
+    
+    //MARK: いる？
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+    }
+    //MARK: ここで値を渡しにいく（セーブ）
+    @IBAction func pressSaveButton( _ sender: Any){
+        guard let index = indexPath?.row else { return print("indexがnil")}
+        guard let text = itemAddTextField.text else {return print("textFieldがnil")}
+        self.delegate?.didSaveEdit(name: text, index: index)
+        self.dismiss(animated: true)
+    }
+    //MARK: VCから渡されてきた値を表示する
     override func viewDidLoad() {
         super.viewDidLoad()
-        switch mode {
-        case .add:
-            break
-        case .edit(let editMode):
-            itemAddTextField.text = editMode.name
-        default:
-            break
-        }
+        
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch mode {
-        case .add:
-            if segue.identifier == "addSegue" {
-                let addView = segue.destination as! AddItemViewController
-                addView.name = ""
-            }
-        case .edit(let editMode):
-            if segue.identifier == "editSegue" {
-                let editView = segue.destination as! AddItemViewController
-                editView.name = itemAddTextField.text!
-               
-            }
-        default:
-            break
-        }
-    }
-            
-
-    @IBAction func pressSaveButton( _ sender: Any){
-        guard let name = itemAddTextField.text else { return }
-        let mainView = self.storyboard?.instantiateViewController(identifier: "mainVC") as! ViewController
-        
-        switch mode {
-        case .add:
-            mainView.sample = itemAddTextField.text!
-            //mainView.itemArray.append(Item(name: itemAddTextField.text!, isChecked: false))
-            self.navigationController?.pushViewController(mainView, animated: true)
-        case .edit(let editMode):
-            break
-        default:
-            break
-        }
-        
-        
-        
-        
-        //        guard let itemAddTextfield  = itemAddTextField.text else { return }
-        //        print("itemAddTF", itemAddTextfield)
-        //        switch mode {
-        //        case .add:
-        //            delegate?.didSaveAdd(neme: itemAddTextfield)
-        //        case .edit(let editMode):
-        //            delegate?.didSaveEdit(name: itemAddTextfield,index: editMode.index)
-        //        default:
-        //            return
-        //        }
-    }
-    
-    @IBAction func pressCancelButton(_ sender: Any) { }
 }
 
+
+//var editText: ((String) -> Void)? = nil
