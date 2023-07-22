@@ -4,9 +4,6 @@
 //
 //  Created by sako0602 on 2023/07/05.
 //
-
-//🍔Storyboard ID : mainVC
-//やりたい
 import UIKit
 
 class ViewController: UIViewController {
@@ -37,15 +34,26 @@ class ViewController: UIViewController {
     }
     //値をもらうための準備をする /// セグエ実行前処理 //セグエが実行され用途していることをViewContorllerへ通知する。
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == AddItemViewController.editSegueIdentifier {
-             let nav = segue.destination as! UINavigationController
-             let addVC = nav.topViewController as! AddItemViewController
-            //このViewがdelegateを通じて、値を渡されることを明示
+        guard let identifier = segue.identifier else { return print("identifierがnil") }
+        switch identifier {
+        case AddItemViewController.editSegueIdentifier:
+            let nav = segue.destination as! UINavigationController
+            let addVC = nav.topViewController as! AddItemViewController
+            //このViewがdelegateで、値を渡されることを明示する。
             addVC.delegate = self
             //MARK: AddItemViewControllerのtextFieldに値を渡す。
             addVC.indexPath = selectedItemIndex
             addVC.itemName = selectedItemName
+            
+        case AddItemViewController.addSegueIdentifier:
+            let nav = segue.destination as! UINavigationController
+            let addVC = nav.topViewController as! AddItemViewController
+            
+            addVC.delegate = self
+        default:
+            break
         }
+        
     }
 }
 
@@ -56,21 +64,21 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return itemArray.count
     }
-    //MARK: （公式）行が選択されていることをデリゲートに伝える。
+    //MARK: cellを構築
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.cellIdentifier, for: indexPath) as! TableViewCell
         cell.configure(item: itemArray[indexPath.row])
         return cell
     }
-    //MARK: タップされたcellとtoggleを反転する。（公式）行が選択されていることをデリゲートに伝える。
+    //MARK: タップされたcellとtoggleを反転する。
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         itemArray[indexPath.row].isChecked.toggle()
-        tableView.reloadData()
+        tableView.reloadRows(at: [indexPath], with: .automatic)
     }
     
-    //MARK: タップされたcellの番号を取得し、segueに情報を渡す。（公式）ユーザが指定された行の詳細ボタンをタップしたことをデイゲートに伝える。
+    //MARK: タップされたcellの番号を取得し、segueに情報を渡す。
     func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-    //MARK: このメソッド内に書かれた内容がperformSegueを通して渡されるってこと？
+    //MARK: このメソッド内に書かれた内容がperformSegueを通して渡される
         selectedItemName = itemArray[indexPath.row].name
         selectedItemIndex = indexPath
         //MARK: senderに渡したい値
@@ -80,14 +88,13 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
 //MARK: - 自作したTextFieldDelegateに適合させる
 extension ViewController: TextFieldDelegate {
     //MARK: 新しい要素を配列に入れる
-//    func didSaveAdd(neme: String) {
-//        self.itemArray.append(Item(name: neme, isChecked: false))
-//        ItemTableView.reloadData()
-//    }
+    func didSaveAdd(neme: String) {
+        self.itemArray.append(Item(name: neme, isChecked: false))
+        ItemTableView.reloadData()
+    }
     //MARK: 選択されたcellの配列を上書きする
     func didSaveEdit(name: String, index: Int) {
         guard let editIndexPath = selectedItemIndex else { return }
-        print("🍔Delegate/Index", editIndexPath)
         itemArray[index].name = name
         ItemTableView.reloadRows(at: [editIndexPath] , with: .automatic)
     }
