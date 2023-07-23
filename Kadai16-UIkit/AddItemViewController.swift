@@ -47,10 +47,7 @@ class AddItemViewController: UIViewController {
             self.dismiss(animated: true)
             return
         case .Edit:
-            guard let index = indexPath?.row ,let text = itemAddTextField.text else {
-                print("🍔: Invalid index or textField")
-                return
-            }
+            guard let index = indexPath?.row ,let text = itemAddTextField.text else { return print("🍔: Invalid index or textField")  }
             self.delegate?.didSaveEdit(name: text, index: index)
             self.dismiss(animated: true)
             return

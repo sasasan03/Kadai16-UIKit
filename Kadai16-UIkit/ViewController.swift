@@ -7,8 +7,6 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
-    static let StoryBoardID = "mainVC"
 
     var itemArray = [
         Item(name: "朝もく", isChecked: false),
@@ -28,7 +26,7 @@ class ViewController: UIViewController {
         ItemTableView.delegate = self
         ItemTableView.register(UINib(nibName: TableViewCell.nibName, bundle: nil), forCellReuseIdentifier: TableViewCell.cellIdentifier)
     }
-    //値をもらうための準備をする。セグエが実行されようとしていることをViewContorllerへ通知する。値の渡し方prepare
+    //値をもらうための準備をする。セグエが実行されようとしていることをViewContorllerへ通知する。
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let identifier = segue.identifier else { return print("identifierがnil") }
         
@@ -36,7 +34,7 @@ class ViewController: UIViewController {
         case AddItemViewController.editSegueIdentifier:
             guard let nav = segue.destination as? UINavigationController else { return }
             guard let addVC =  nav.topViewController as? AddItemViewController else { return }
-            //このViewがdelegateで、値を渡されることを明示する。
+            //このViewがdelegateで、値を渡されることを宣言する。
             addVC.delegate = self
             //MARK: AddItemViewControllerのtextFieldに値を渡ための処理を書く。
             addVC.mode = AddItemViewController.Mode.Edit
@@ -69,7 +67,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
         cell.configure(item: itemArray[indexPath.row])
         return cell
     }
-    //MARK: タップされたcellとtoggleを反転する。
+    //MARK: タップされたcellのtoggleを反転する。
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         itemArray[indexPath.row].isChecked.toggle()
         tableView.reloadRows(at: [indexPath], with: .automatic)
@@ -85,12 +83,12 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
 }
 //MARK: - 自作したTextFieldDelegateを適合させる
 extension ViewController: TextFieldDelegate {
-    //MARK: 新しい要素を配列に入れる
+    //MARK: ここで新しい要素を配列に入れる処理を書く
     func didSaveAdd(neme: String) {
         self.itemArray.append(Item(name: neme, isChecked: false))
         ItemTableView.reloadData()
     }
-    //MARK: 選択されたcellの配列を上書きする
+    //MARK: ここで選択されたcellの配列を上書きする処理を書く
     func didSaveEdit(name: String, index: Int) {
         guard let editIndexPath = selectedItemIndex else { return }
         itemArray[index].name = name
