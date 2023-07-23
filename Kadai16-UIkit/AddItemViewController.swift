@@ -27,7 +27,9 @@ class AddItemViewController: UIViewController {
     //MARK: - コンポーネント群
     @IBOutlet weak var itemAddTextField: UITextField!
     //MARK: cancelボタンのセグエ
-    @IBAction func pressCancelButton(_ sender: Any) { }
+    @IBAction func pressCancelButton(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
     //MARK: ここで値を渡しにいく（セーブボタン）
     @IBAction func pressSaveButton( _ sender: Any){

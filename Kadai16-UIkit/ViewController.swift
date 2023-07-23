@@ -13,7 +13,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var ItemTableView: UITableView!
     
     var selectedItemIndex: IndexPath?
-    
     var selectedItemName: String?
     
     var itemArray = [
@@ -31,20 +30,21 @@ class ViewController: UIViewController {
     //値をもらうための準備をする。セグエが実行されようとしていることをViewContorllerへ通知する。値の渡し方prepare
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let identifier = segue.identifier else { return print("identifierがnil") }
+        
         switch identifier {
         case AddItemViewController.editSegueIdentifier:
-            let nav = segue.destination as! UINavigationController
-            let addVC = nav.topViewController as! AddItemViewController
-            //このViewがdelegateで、値を渡されることを明示する。
-            addVC.delegate = self
-            //MARK: AddItemViewControllerのtextFieldに値を渡す。
-            addVC.indexPath = selectedItemIndex
-            addVC.itemName = selectedItemName
+            if let addVC = segue.destination as? AddItemViewController {
+                //このViewがdelegateで、値を渡されることを明示する。
+                addVC.delegate = self
+                //MARK: AddItemViewControllerのtextFieldに値を渡す。
+                addVC.indexPath = selectedItemIndex
+                addVC.itemName = selectedItemName
+            }
             
         case AddItemViewController.addSegueIdentifier:
-            let nav = segue.destination as! UINavigationController
-            let addVC = nav.topViewController as! AddItemViewController
-            addVC.delegate = self
+            if let addVC = segue.destination as? AddItemViewController {
+                addVC.delegate = self
+            }
         default:
             break
         }
