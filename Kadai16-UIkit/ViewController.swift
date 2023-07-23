@@ -12,10 +12,6 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var ItemTableView: UITableView!
     
-    @IBAction func exitFromAddSave(segue: UIStoryboardSegue) { }
-    
-    @IBAction func exitFromAddCancel(segue: UIStoryboardSegue) { }
-    
     var selectedItemIndex: IndexPath?
     
     var selectedItemName: String?
@@ -32,7 +28,7 @@ class ViewController: UIViewController {
         ItemTableView.delegate = self
         ItemTableView.register(UINib(nibName: TableViewCell.nibName, bundle: nil), forCellReuseIdentifier: TableViewCell.cellIdentifier)
     }
-    //値をもらうための準備をする /// セグエ実行前処理 //セグエが実行され用途していることをViewContorllerへ通知する。
+    //値をもらうための準備をする。セグエが実行されようとしていることをViewContorllerへ通知する。値の渡し方prepare
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let identifier = segue.identifier else { return print("identifierがnil") }
         switch identifier {
@@ -48,7 +44,6 @@ class ViewController: UIViewController {
         case AddItemViewController.addSegueIdentifier:
             let nav = segue.destination as! UINavigationController
             let addVC = nav.topViewController as! AddItemViewController
-            
             addVC.delegate = self
         default:
             break
@@ -81,11 +76,10 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
     //MARK: このメソッド内に書かれた内容がperformSegueを通して渡される
         selectedItemName = itemArray[indexPath.row].name
         selectedItemIndex = indexPath
-        //MARK: senderに渡したい値
         performSegue(withIdentifier: AddItemViewController.editSegueIdentifier, sender: indexPath)
     }
 }
-//MARK: - 自作したTextFieldDelegateに適合させる
+//MARK: - 自作したTextFieldDelegateを適合させる
 extension ViewController: TextFieldDelegate {
     //MARK: 新しい要素を配列に入れる
     func didSaveAdd(neme: String) {
