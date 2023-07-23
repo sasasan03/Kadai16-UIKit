@@ -10,16 +10,17 @@ class ViewController: UIViewController {
     
     static let StoryBoardID = "mainVC"
 
+    var itemArray = [
+        Item(name: "朝もく", isChecked: false),
+        Item(name: "昼もく", isChecked: true),
+        Item(name: "夜もく", isChecked: false)
+    ]
+    
     @IBOutlet weak var ItemTableView: UITableView!
     
+    //編集画面に遷移した時に、addViewで表示させたいItemの名前とそのItemのIndex番号を渡す。
     var selectedItemIndex: IndexPath?
     var selectedItemName: String?
-    
-    var itemArray = [
-    Item(name: "朝もく", isChecked: false),
-    Item(name: "昼もく", isChecked: true),
-    Item(name: "夜もく", isChecked: false)
-    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,18 +34,21 @@ class ViewController: UIViewController {
         
         switch identifier {
         case AddItemViewController.editSegueIdentifier:
-            if let addVC = segue.destination as? AddItemViewController {
-                //このViewがdelegateで、値を渡されることを明示する。
-                addVC.delegate = self
-                //MARK: AddItemViewControllerのtextFieldに値を渡す。
-                addVC.indexPath = selectedItemIndex
-                addVC.itemName = selectedItemName
-            }
+            guard let nav = segue.destination as? UINavigationController else { return }
+            guard let addVC =  nav.topViewController as? AddItemViewController else { return }
+            //このViewがdelegateで、値を渡されることを明示する。
+            addVC.delegate = self
+            //MARK: AddItemViewControllerのtextFieldに値を渡ための処理を書く。
+            addVC.mode = AddItemViewController.Mode.Edit
+            addVC.indexPath = selectedItemIndex
+            addVC.itemName = selectedItemName
             
         case AddItemViewController.addSegueIdentifier:
-            if let addVC = segue.destination as? AddItemViewController {
-                addVC.delegate = self
-            }
+            guard let nav = segue.destination as? UINavigationController else { return }
+            guard let addVC =  nav.topViewController as? AddItemViewController else { return }
+            addVC.delegate = self
+            addVC.mode = AddItemViewController.Mode.Add
+            
         default:
             break
         }
