@@ -34,13 +34,13 @@ class ViewController: UIViewController {
         case AddItemViewController.editSegueIdentifier:
             guard let nav = segue.destination as? UINavigationController else { return }
             guard let addVC =  nav.topViewController as? AddItemViewController else { return }
-            //このViewがdelegateで、値を渡されることを宣言する。
+            //このViewがdelegateで、値を渡されることを宣言する。通知先をViewController自身に設定する。
             addVC.delegate = self
             //MARK: AddItemViewControllerのtextFieldに値を渡ための処理を書く。
             addVC.mode = AddItemViewController.Mode.Edit
             addVC.indexPath = selectedItemIndex
             addVC.itemName = selectedItemName
-            
+            segue.destination.storyboard
         case AddItemViewController.addSegueIdentifier:
             guard let nav = segue.destination as? UINavigationController else { return }
             guard let addVC =  nav.topViewController as? AddItemViewController else { return }
@@ -50,7 +50,6 @@ class ViewController: UIViewController {
         default:
             break
         }
-        
     }
 }
 
@@ -82,7 +81,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
     }
 }
 //MARK: - 自作したTextFieldDelegateを適合させる
-extension ViewController: TextFieldDelegate {
+extension ViewController: TextFieldDelegate { //UI
     //MARK: ここで新しい要素を配列に入れる処理を書く
     func didSaveAdd(neme: String) {
         self.itemArray.append(Item(name: neme, isChecked: false))

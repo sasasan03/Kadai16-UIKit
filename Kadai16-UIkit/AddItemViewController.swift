@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol TextFieldDelegate: AnyObject {
+protocol TextFieldDelegate: AnyObject { //AddItemDelegate　委譲する側の名前。
     func didSaveAdd(neme: String)
     func didSaveEdit(name: String, index: Int)
 }
