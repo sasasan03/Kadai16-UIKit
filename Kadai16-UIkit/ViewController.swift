@@ -19,7 +19,6 @@ class ViewController: UIViewController {
     //編集画面に遷移した時に、addViewで表示させたいItemの名前とそのItemのIndex番号を渡す。
     var selectedItemIndex: IndexPath?
     var selectedItemName: String?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         ItemTableView.dataSource = self
@@ -29,10 +28,10 @@ class ViewController: UIViewController {
     //値をもらうための準備をする。セグエが実行されようとしていることをViewContorllerへ通知する。
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let identifier = segue.identifier else { return print("identifierがnil") }
-        
         switch identifier {
         case AddItemViewController.editSegueIdentifier:
             guard let nav = segue.destination as? UINavigationController else { return }
+            guard let nav2 = segue.destination.navigationController else { return }
             guard let addVC =  nav.topViewController as? AddItemViewController else { return }
             //このViewがdelegateで、値を渡されることを宣言する。通知先をViewController自身に設定する。
             addVC.delegate = self
